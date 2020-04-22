@@ -16,6 +16,13 @@ typedef struct
   Int_array *above_range;
 } Partition;
 
+typedef enum
+{
+  BELOW,
+  BETWEEN,
+  ABOVE,
+} Range;
+
 void print_int_array(char *, Int_array *);
 
 Int_array *int_array_from(Int_ptr, size_t);

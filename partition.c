@@ -31,15 +31,15 @@ Partition *separate_numbers(Int_ptr numbers, size_t length, int num1, int num2)
 
   for (size_t i = 0; i < length; i++)
   {
-    int selector = numbers[i] < num1 ? 0 : numbers[i] <= num2 ? 1 : 2;
+    int selector = numbers[i] < num1 ? BELOW : numbers[i] <= num2 ? BETWEEN : ABOVE;
     category[selector][count[selector]] = numbers[i];
     ++count[selector];
   }
 
   Partition *groups = malloc(sizeof(Partition));
-  groups->below_range = int_array_from(category[0], count[0]);
-  groups->in_range = int_array_from(category[1], count[1]);
-  groups->above_range = int_array_from(category[2], count[2]);
+  groups->below_range = int_array_from(category[BELOW], count[BELOW]);
+  groups->in_range = int_array_from(category[BETWEEN], count[BETWEEN]);
+  groups->above_range = int_array_from(category[ABOVE], count[ABOVE]);
 
   return groups;
 }
