@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "partition.h"
 
-typedef int *Int_ptr;
-
-typedef struct
+void print_int_array(char message[], Int_array *integers)
 {
-  size_t length;
-  Int_ptr values;
-} Int_array;
+  printf("%s\n", message);
+  for (size_t i = 0; i < integers->length; i++)
+  {
+    printf("%d\n", integers->values[i]);
+  }
+}
