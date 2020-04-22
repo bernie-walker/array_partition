@@ -11,11 +11,13 @@ typedef struct
 
 typedef struct
 {
-  Int_array below_range;
-  Int_array above_range;
-  Int_array in_range;
+  Int_array *below_range;
+  Int_array *in_range;
+  Int_array *above_range;
 } Partition;
 
 void print_int_array(char *, Int_array *);
 
 Int_array *int_array_from(Int_ptr, size_t);
+
+Partition *separate_numbers(Int_ptr, size_t, int, int);
