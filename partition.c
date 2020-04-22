@@ -24,6 +24,19 @@ Int_array *int_array_from(Int_ptr numbers, size_t length)
   return int_array;
 }
 
+Range decide_range(int number, int limit1, int limit2)
+{
+  int higher_limit = limit1 > limit2 ? limit1 : limit2;
+  int lower_limit = limit1 < limit2 ? limit1 : limit2;
+
+  if (number < lower_limit)
+  {
+    return BELOW;
+  }
+
+  return number <= higher_limit ? BETWEEN : ABOVE;
+}
+
 Partition *separate_numbers(Int_ptr numbers, size_t length, int num1, int num2)
 {
   int category[3][length];
@@ -31,7 +44,7 @@ Partition *separate_numbers(Int_ptr numbers, size_t length, int num1, int num2)
 
   for (size_t i = 0; i < length; i++)
   {
-    int selector = numbers[i] < num1 ? BELOW : numbers[i] <= num2 ? BETWEEN : ABOVE;
+    int selector = decide_range(numbers[i], num1, num2);
     category[selector][count[selector]] = numbers[i];
     ++count[selector];
   }
