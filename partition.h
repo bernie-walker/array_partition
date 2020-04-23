@@ -27,6 +27,8 @@ void print_int_array(char *, Int_array *);
 
 Int_array *int_array_from(Int_ptr, size_t);
 
+Partition *create_groups(size_t n, int[3][n], size_t[3]);
+
 Range decide_range(int, int, int);
 
 Partition *separate_numbers(Int_ptr, size_t, int, int);

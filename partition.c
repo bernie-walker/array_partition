@@ -24,6 +24,17 @@ Int_array *int_array_from(Int_ptr numbers, size_t length)
   return int_array;
 }
 
+Partition *create_groups(size_t n, int ranges[3][n], size_t count[3])
+{
+  Partition *groups = malloc(sizeof(Partition));
+
+  groups->below_range = int_array_from(ranges[BELOW], count[BELOW]);
+  groups->in_range = int_array_from(ranges[BETWEEN], count[BETWEEN]);
+  groups->above_range = int_array_from(ranges[ABOVE], count[ABOVE]);
+
+  return groups;
+}
+
 Range decide_range(int number, int limit1, int limit2)
 {
   int higher_limit = limit1 > limit2 ? limit1 : limit2;
@@ -40,7 +51,7 @@ Range decide_range(int number, int limit1, int limit2)
 Partition *separate_numbers(Int_ptr numbers, size_t length, int num1, int num2)
 {
   int category[3][length];
-  int count[3] = {0, 0, 0};
+  size_t count[3] = {0, 0, 0};
 
   for (size_t i = 0; i < length; i++)
   {
@@ -49,10 +60,5 @@ Partition *separate_numbers(Int_ptr numbers, size_t length, int num1, int num2)
     ++count[selector];
   }
 
-  Partition *groups = malloc(sizeof(Partition));
-  groups->below_range = int_array_from(category[BELOW], count[BELOW]);
-  groups->in_range = int_array_from(category[BETWEEN], count[BETWEEN]);
-  groups->above_range = int_array_from(category[ABOVE], count[ABOVE]);
-
-  return groups;
+  return create_groups(length, category, count);
 }
